@@ -53,13 +53,36 @@ public class Game
             }
         }
 
-//         this.render_grid();
+//         this.renderGrid();
         System.out.println("Game over.");
+    }
+
+    private void renderGrid()
+    {
+        String m1 = this.grid.get(0).mark;
+        String m2 = this.grid.get(1).mark;
+        String m3 = this.grid.get(2).mark;
+        String m4 = this.grid.get(3).mark;
+        String m5 = this.grid.get(4).mark;
+        String m6 = this.grid.get(5).mark;
+        String m7 = this.grid.get(6).mark;
+        String m8 = this.grid.get(7).mark;
+        String m9 = this.grid.get(8).mark;
+        String tabLines = "_______";
+        String div = tabLines + "|" + tabLines;
+
+        System.out.println(
+            "\t\t" + m7 + "\t|\t" + m8 + "\t|\t" + m9 + "\n" +
+            "\t\t" + "_"+   div   + "_"+   div   + "_"+ "\n" +
+            "\t\t" + m4 + "\t|\t" + m5 + "\t|\t" + m6 + "\n" +
+            "\t\t" + "_"+   div   + "_"+   div   + "_"+ "\n" +
+            "\t\t" + m1 + "\t|\t" + m2 + "\t|\t" + m3 + "\n"
+        );
     }
 
     private void turn()
     {
-//         this.render_grid();
+        this.renderGrid();
         System.out.println("Player '" + this.crnt_plyr + "', your turn!");
 
 //         Square square = this.prompt_square();

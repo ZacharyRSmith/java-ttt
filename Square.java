@@ -1,6 +1,6 @@
 public class Square
 {
-    public String mark = " ";
+    public String mark = "X";
 
     public Square()
     {}
