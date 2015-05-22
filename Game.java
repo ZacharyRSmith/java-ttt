@@ -37,4 +37,34 @@ public class Game
             "Prepare yourself. Muahahaaa!! >:}} \n"
         );
     }
+
+    public void engine()
+    {
+        // The board will be filled after 9 turns. If there is no victory,
+        // then it is a draw.
+        for (int turn_counter=0; turn_counter<9; turn_counter++)
+        {
+            this.turn();
+
+            if (this.victory)
+            {
+                System.out.println("Player '" + this.crnt_plyr + "', you lose! :P");
+                break;
+            }
+        }
+
+//         this.render_grid();
+        System.out.println("Game over.");
+    }
+
+    private void turn()
+    {
+//         this.render_grid();
+        System.out.println("Player '" + this.crnt_plyr + "', your turn!");
+
+//         Square square = this.prompt_square();
+//         this.mark_square(square);
+//         this.check_victory(square);
+//         this.switch_player();
+    }
 }
