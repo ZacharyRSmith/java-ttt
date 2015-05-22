@@ -1,9 +1,12 @@
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game
 {
     public String crnt_plyr = "X";
+    private ArrayList<List<Integer>> lines = this.setLines();
     public ArrayList<Square> grid = this.build_grid();
     public boolean victory = false;
 
@@ -22,6 +25,20 @@ public class Game
         }
 
         return grid;
+    }
+
+    private void setVictory()
+    {
+        for (List<Integer> line : this.lines)
+        {
+            System.out.println("Hello!");
+            if (this.grid.get(line.get(0)).mark == this.crnt_plyr &&
+                this.grid.get(line.get(1)).mark == this.crnt_plyr &&
+                this.grid.get(line.get(2)).mark == this.crnt_plyr)
+            {
+                this.victory = true;
+            }
+        }
     }
 
     private static void display_instruct()
@@ -43,7 +60,8 @@ public class Game
     {
         // The board will be filled after 9 turns. If there is no victory,
         // then it is a draw.
-        for (int turn_counter=0; turn_counter<9; turn_counter++)
+        int turn_counter = 0;
+        while (turn_counter < 9)
         {
             this.turn();
 
@@ -52,15 +70,21 @@ public class Game
                 System.out.println("Player '" + this.crnt_plyr + "', you lose! :P");
                 break;
             }
+            turn_counter++;
         }
 
-//         this.renderGrid();
+        this.renderGrid();
         System.out.println("Game over.");
     }
 
     private Square getSquare(int squareI)
     {
         return this.grid.get(squareI - 1);
+    }
+
+    private void markSquare(Square square)
+    {
+        square.mark = this.crnt_plyr;
     }
 
     private Square promptSquare()
@@ -109,14 +133,41 @@ public class Game
         );
     }
 
+    private ArrayList<List<Integer>> setLines()
+    {
+        ArrayList<List<Integer>> lines = new ArrayList<List<Integer>>();
+        lines.add(Arrays.asList(0, 1, 2));
+        lines.add(Arrays.asList(3, 4, 5));
+        lines.add(Arrays.asList(6, 7, 8));
+        lines.add(Arrays.asList(0, 3, 6));
+        lines.add(Arrays.asList(1, 4, 7));
+        lines.add(Arrays.asList(2, 5, 8));
+        lines.add(Arrays.asList(0, 4, 8));
+        lines.add(Arrays.asList(2, 4, 6));
+
+        return lines;
+    }
+
+    private void switchPlayer()
+    {
+        if (this.crnt_plyr == "X")
+        {
+            this.crnt_plyr = "O";
+        }
+        else
+        {
+            this.crnt_plyr = "X";
+        }
+    }
+
     private void turn()
     {
         this.renderGrid();
         System.out.println("Player '" + this.crnt_plyr + "', your turn!");
 
         Square square = this.promptSquare();
-//         this.mark_square(square);
-//         this.check_victory(square);
-//         this.switch_player();
+        this.markSquare(square);
+        this.setVictory();
+        this.switchPlayer();
     }
 }

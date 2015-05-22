@@ -4,7 +4,5 @@ public class Main
     {
         Game game = new Game();
         game.engine();
-//         System.out.println(game.crnt_plyr);
-//         System.out.println(game.grid.size());
     }
 }
