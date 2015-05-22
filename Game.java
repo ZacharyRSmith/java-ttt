@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game
 {
@@ -57,6 +58,34 @@ public class Game
         System.out.println("Game over.");
     }
 
+    private Square getSquare(int squareI)
+    {
+        return this.grid.get(squareI - 1);
+    }
+
+    private Square promptSquare()
+    {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Please select your square...");
+        int squareI = keyboard.nextInt();
+
+        if (!(1 <= squareI) || !(squareI <= 9))
+        {
+            System.out.println("I cannot find a square matching that input.");
+            return this.promptSquare();
+        }
+
+        Square square = this.getSquare(squareI);
+
+        if (square.mark != " ")
+        {
+            System.out.println("That square is already marked!");
+            return this.promptSquare();
+        }
+
+        return square;
+    }
+
     private void renderGrid()
     {
         String m1 = this.grid.get(0).mark;
@@ -85,7 +114,7 @@ public class Game
         this.renderGrid();
         System.out.println("Player '" + this.crnt_plyr + "', your turn!");
 
-//         Square square = this.prompt_square();
+        Square square = this.promptSquare();
 //         this.mark_square(square);
 //         this.check_victory(square);
 //         this.switch_player();
